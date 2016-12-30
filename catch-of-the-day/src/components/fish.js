@@ -4,7 +4,7 @@ import {formatPrice} from '../helpers';
 class Fish extends React.Component {
 
   render() {
-    const {details, index} = this.props;
+    const {details, index,} = this.props;
     const isAvailable = details.status === 'available';
     const buttonText = isAvailable
       ? 'Add To Order'
