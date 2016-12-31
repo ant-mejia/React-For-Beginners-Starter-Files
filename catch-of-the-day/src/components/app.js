@@ -10,17 +10,18 @@ class App extends React.Component {
     super(props);
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
+    this.updateFish = this.updateFish.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.state = {
       fishes: {},
-      order: {}
+      order: {},
     };
   }
   componentWillMount() {
     // runs right before app is rendered
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
       context: this,
-      state: 'fishes',
+      state: 'fishes'
     });
 
     const localStorageRef = localStorage.getItem(`order-${this.props.params.storeid}`);
@@ -33,7 +34,6 @@ class App extends React.Component {
     base.removeBinding(this.ref);
   }
   componentWillUpdate(nextProps, nextState) {
-    console.log(this.props.params.storeid);
     localStorage.setItem(`order-${this.props.params.storeid}`, JSON.stringify(nextState.order));
   }
   addFish(fish) {
@@ -46,6 +46,13 @@ class App extends React.Component {
     fishes[`fish-${timestamp}`] = fish;
 
     //set state
+    this.setState({fishes});
+  }
+  updateFish(key, updatedFish) {
+    const fishes = {
+      ...this.state.fishes
+    };
+    fishes[key] = updatedFish;
     this.setState({fishes});
   }
 
@@ -73,7 +80,7 @@ class App extends React.Component {
           </ul>
         </div>
         <Order fishes={this.state.fishes} order={this.state.order} params={this.props.params}/>
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
+        <Inventory updateFish={this.updateFish} addFish={this.addFish} loadSamples={this.loadSamples} fishes={this.state.fishes}/>
       </div>
     );
   }
