@@ -11,7 +11,7 @@ class Inventory extends React.Component {
     const fish = this.props.fishes[key];
     const updatedFish = {
       ...fish,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }
     this.props.updateFish(key, updatedFish)
   }
@@ -44,4 +44,11 @@ class Inventory extends React.Component {
 
 }
 
+Inventory.propTypes = {
+  fishes: React.PropTypes.object.isRequired,
+  updateFish: React.PropTypes.func.isRequired,
+  removeFish: React.PropTypes.func.isRequired,
+  addFish: React.PropTypes.func.isRequired,
+  loadSamples: React.PropTypes.func.isRequired
+};
 export default Inventory;

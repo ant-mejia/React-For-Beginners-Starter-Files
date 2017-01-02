@@ -16,14 +16,14 @@ class App extends React.Component {
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.state = {
       fishes: {},
-      order: {},
+      order: {}
     };
   }
   componentWillMount() {
     // runs right before app is rendered
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
       context: this,
-      state: 'fishes'
+      state: 'fishes',
     });
 
     const localStorageRef = localStorage.getItem(`order-${this.props.params.storeid}`);
@@ -106,5 +106,9 @@ class App extends React.Component {
   }
 
 }
+
+App.propTypes = {
+  params: React.PropTypes.object.isRequired
+};
 
 export default App;

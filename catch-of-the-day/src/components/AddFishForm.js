@@ -9,7 +9,7 @@ class AddFishForm extends React.Component {
       price: this.price.value,
       status: this.status.value,
       desc: this.desc.value,
-      image: this.image.value,
+      image: this.image.value
     }
     this.props.addFish(fish);
     this.fishForm.reset();
@@ -31,5 +31,8 @@ class AddFishForm extends React.Component {
     )
   }
 }
+AddFishForm.propTypes = {
+  addFish: React.PropTypes.func.isRequired
+};
 
 export default AddFishForm;
